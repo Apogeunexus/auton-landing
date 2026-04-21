@@ -306,7 +306,7 @@ export default function FundadoraPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <PrimaryBtn big onWhiteBg>
-              Começar agora por R$ 397/mês
+              Começar agora por R$ 997/mês
               <ArrowRight className="w-5 h-5" />
             </PrimaryBtn>
             <OutlineBtn big onDarkBg>
@@ -1110,7 +1110,7 @@ export default function FundadoraPage() {
             className="text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
             style={{ color: "rgba(255,255,255,0.85)" }}
           >
-            Comece hoje por R$ 397/mês. Teste por 7 dias com garantia incondicional. Decida com
+            Comece hoje por R$ 997/mês. Teste por 7 dias com garantia incondicional. Decida com
             calma.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
