@@ -328,41 +328,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BARRA DE PROVA SOCIAL (NOVA) */}
-      <section className="py-14 border-b" style={{ background: C.card, borderColor: C.border }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <p
-            className="text-center text-xs font-semibold uppercase mb-10"
-            style={{ letterSpacing: "0.18em", color: C.text3 }}
-          >
-            Credenciais e autoridade
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { num: "3.000", label: "profissionais formados\nno Método ADS via USI" },
-              { num: "100+", label: "profissionais em\nprática clínica diária" },
-              { num: "60", label: "betas validaram o\nmotor AI ADS" },
-              { num: "até 80%", label: "redução no tempo de\ndocumentação clínica*" },
-            ].map((m, i) => (
-              <div key={i}>
-                <p className="text-4xl font-bold" style={{ color: C.primary }}>
-                  {m.num}
-                </p>
-                <p
-                  className="text-sm mt-2 leading-snug whitespace-pre-line"
-                  style={{ color: C.text2 }}
-                >
-                  {m.label}
-                </p>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-center mt-8" style={{ color: C.text3 }}>
-            * Base: 60 profissionais em fase beta, 90 dias de uso contínuo
-          </p>
-        </div>
-      </section>
-
       {/* PROPÓSITO */}
       <section className="py-24" style={{ background: C.bg }}>
         <div className="max-w-4xl mx-auto px-6 text-center">
