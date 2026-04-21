@@ -350,7 +350,7 @@ export default function HomePage() {
             </p>
             <p>Chega de tratar sintomas e ignorar a causa.</p>
             <p className="pt-4">
-              A Auton nasceu para dar ao profissional de saúde a estrutura que a medicina moderna
+              A Auton nasceu para dar ao profissional de saúde a estrutura que a saúde moderna
               nunca entregou: uma forma de{" "}
               <strong style={{ color: C.primary }}>
                 pensar o paciente inteiro, em tempo real, com método
@@ -366,7 +366,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
             eyebrow="Quem criou"
-            title="30+ anos de medicina integrativa. 3.000 profissionais formados."
+            title="Três décadas de prática em saúde integrativa."
             subtitle="O Método ADS foi codificado em IA pelos próprios criadores. Não é ChatGPT com avental — é décadas de prática clínica transformadas em ferramenta."
           />
           <div className="grid md:grid-cols-2 gap-8 mt-12">
@@ -375,7 +375,7 @@ export default function HomePage() {
                 name: "Dr. Mohamad Barakat",
                 crm: "CRM SP 68874",
                 bullets: [
-                  "30+ anos em medicina integrativa e clínica",
+                  "30+ anos em prática clínica integrativa",
                   "Fundador do Instituto Dr. Barakat (12 núcleos)",
                   "Coautor do Método ADS — base clínica codificada na AI",
                 ],
@@ -384,7 +384,7 @@ export default function HomePage() {
                 name: "Dr. Marcelo Bonanza",
                 crm: "CRMBA 14684",
                 bullets: [
-                  "20+ anos em medicina integrativa",
+                  "20+ anos em prática clínica integrativa",
                   "Diretor Acadêmico da USI — 3.000 profissionais formados",
                   "Autor de 10+ livros publicados no Brasil e em Portugal",
                 ],
