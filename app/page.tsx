@@ -876,8 +876,9 @@ export default function FundadoraPage() {
           <div className="grid md:grid-cols-3 gap-6 mt-12">
             <PlanCard
               name="Starter"
-              price="R$ 997"
-              annual="R$ 797/mês no anual"
+              price="R$ 797"
+              priceHint="/mês no plano anual"
+              annual="ou R$ 997/mês no plano mensal"
               cta="Escolher Starter"
               items={[
                 "Dashboard de casos",
@@ -896,8 +897,9 @@ export default function FundadoraPage() {
             <PlanCard
               hero
               name="Pro"
-              price="R$ 1.497"
-              annual="R$ 1.197/mês no anual"
+              price="R$ 1.197"
+              priceHint="/mês no plano anual"
+              annual="ou R$ 1.497/mês no plano mensal"
               cta="Escolher Pro"
               items={[
                 "Tudo do Starter, mais:",
@@ -908,9 +910,9 @@ export default function FundadoraPage() {
             />
             <PlanCard
               name="Enterprise"
-              price="R$ 4.997"
-              priceHint="/mês a partir de"
-              annual="R$ 3.997/mês no anual"
+              price="R$ 3.997"
+              priceHint="/mês no plano anual · a partir de"
+              annual="ou a partir de R$ 4.997/mês no plano mensal"
               cta="Falar com o time"
               items={[
                 "Tudo do Pro, mais:",
