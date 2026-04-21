@@ -974,130 +974,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BÔNUS DO ANUAL (NOVA) */}
-      <section className="py-20" style={{ background: C.bg }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionTitle
-            eyebrow="Bônus inclusos no plano anual"
-            title="Quem assina o anual, leva junto."
-            subtitle="Quatro bônus que fortalecem sua prática imediatamente — sem custo adicional."
-          />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            {[
-              {
-                icon: Scale,
-                title: "Parecer jurídico + compliance",
-                desc: "Material pronto para os conselhos CFM/CFN/CFP sobre uso de IA clínica.",
-              },
-              {
-                icon: FileCheck,
-                title: "PDF cálculo de ROI",
-                desc: "Documento de 1 página pra alinhar investimento com sócio ou família.",
-              },
-              {
-                icon: Play,
-                title: "3 depoimentos em vídeo",
-                desc: "Cases reais de profissionais que saíram de vender consulta pra resolver casos.",
-              },
-              {
-                icon: Gift,
-                title: "Onboarding concierge 1:1",
-                desc: "Call dedicada na 1ª semana + migração gratuita em 48h.",
-              },
-            ].map((b, i) => (
-              <div
-                key={i}
-                className="p-6 rounded-[24px]"
-                style={{
-                  background: C.card,
-                  border: `1px solid ${C.border}`,
-                  boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
-                }}
-              >
-                <div
-                  className="w-11 h-11 rounded-[14px] flex items-center justify-center mb-4"
-                  style={{ background: C.primarySoft }}
-                >
-                  <b.icon className="w-5 h-5" style={{ color: C.primary }} />
-                </div>
-                <h3 className="text-base font-semibold mb-2" style={{ color: C.text }}>
-                  {b.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: C.text2 }}>
-                  {b.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* PLANOS */}
-      <section id="planos" className="py-24" style={{ background: C.bg2 }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <SectionTitle
-            eyebrow="Planos"
-            title="Selecione o seu plano Auton."
-            subtitle="Escolha o plano que acompanha o momento da sua prática clínica."
-          />
-          <div className="grid md:grid-cols-3 gap-6 mt-12">
-            <PlanCard
-              name="Starter"
-              price="R$ 797"
-              priceHint="/mês no plano anual"
-              annual="ou R$ 997/mês no plano mensal"
-              cta="Escolher Starter"
-              items={[
-                "Dashboard de casos",
-                "Agenda",
-                "Teleconsulta",
-                "Prontuário eletrônico automático",
-                "Leitura de exames",
-                "AI ADS (motor do método)",
-                "Protocolo personalizado",
-                "Módulo Solução (Livro da Vida, Alimentação, Suplementação, Atividade Física)",
-                "App do paciente (Soluções, Check-in diário, Relatório antes/depois)",
-                "Comunidade fechada",
-                "Onboarding concierge",
-              ]}
-            />
-            <PlanCard
-              hero
-              name="Pro"
-              price="R$ 1.197"
-              priceHint="/mês no plano anual"
-              annual="ou R$ 1.497/mês no plano mensal"
-              cta="Escolher Pro"
-              items={[
-                "Tudo do Starter, mais:",
-                "Chat IA contextual",
-                "Rede de apoio multidisciplinar",
-                "Encaminhamentos entre colegas",
-              ]}
-            />
-            <PlanCard
-              name="Enterprise"
-              price="R$ 3.997"
-              priceHint="/mês no plano anual · a partir de"
-              annual="ou a partir de R$ 4.997/mês no plano mensal"
-              cta="Falar com o time"
-              items={[
-                "Tudo do Pro, mais:",
-                "Múltiplos usuários",
-                "Diagnóstico de implantação",
-                "Onboarding dedicado",
-                "SLA de suporte",
-              ]}
-            />
-          </div>
-          <p
-            className="text-center mt-8 text-sm"
-            style={{ color: C.text3 }}
-          >
-            Todos os planos anuais incluem os 4 bônus listados acima.
-          </p>
-        </div>
-      </section>
+      <PlansSection />
 
       {/* GARANTIA (NOVA) */}
       <section id="garantia" className="py-20" style={{ background: C.card }}>
@@ -1426,38 +1304,160 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 }
 
 // ============================================================
-// PlanCard
+// PLANS SECTION + TOGGLE Anual/Mensal
 // ============================================================
+
+type Billing = "annual" | "monthly";
+
+function PlansSection() {
+  const [billing, setBilling] = useState<Billing>("annual");
+
+  return (
+    <section id="planos" className="py-24" style={{ background: C.bg2 }}>
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionTitle
+          eyebrow="Planos"
+          title="Selecione o seu plano Auton."
+          subtitle="Escolha o plano que acompanha o momento da sua prática clínica."
+        />
+
+        {/* Toggle Anual/Mensal */}
+        <div className="flex justify-center mb-10">
+          <div
+            className="inline-flex items-center p-1 rounded-full"
+            style={{
+              background: C.card,
+              border: `1px solid ${C.border}`,
+              boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setBilling("annual")}
+              className="px-5 py-2.5 rounded-full text-sm font-semibold transition-all inline-flex items-center gap-2"
+              style={{
+                background: billing === "annual" ? C.primary : "transparent",
+                color: billing === "annual" ? "#FFFFFF" : C.text,
+              }}
+            >
+              Anual
+              <span
+                className="inline-block px-2 py-0.5 text-[10px] rounded-full font-bold"
+                style={{
+                  background: billing === "annual" ? "rgba(255,255,255,0.22)" : "#DCF5E6",
+                  color: billing === "annual" ? "#FFFFFF" : C.success,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                -20%
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setBilling("monthly")}
+              className="px-5 py-2.5 rounded-full text-sm font-semibold transition-all"
+              style={{
+                background: billing === "monthly" ? C.primary : "transparent",
+                color: billing === "monthly" ? "#FFFFFF" : C.text,
+              }}
+            >
+              Mensal
+            </button>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          <PlanCard
+            billing={billing}
+            name="Starter"
+            priceMonthly="997"
+            priceAnnual="797"
+            cta="Escolher Starter"
+            items={[
+              "Dashboard de casos",
+              "Agenda",
+              "Teleconsulta",
+              "Prontuário eletrônico automático",
+              "Leitura de exames",
+              "AI ADS (motor do método)",
+              "Protocolo personalizado",
+              "Módulo Solução (Livro da Vida, Alimentação, Suplementação, Atividade Física)",
+              "App do paciente (Soluções, Check-in diário, Relatório antes/depois)",
+              "Comunidade fechada",
+              "Onboarding concierge",
+            ]}
+          />
+          <PlanCard
+            hero
+            billing={billing}
+            name="Pro"
+            priceMonthly="1.497"
+            priceAnnual="1.197"
+            cta="Escolher Pro"
+            items={[
+              "Tudo do Starter, mais:",
+              "Chat IA contextual",
+              "Rede de apoio multidisciplinar",
+              "Encaminhamentos entre colegas",
+            ]}
+          />
+          <PlanCard
+            billing={billing}
+            enterprise
+            name="Enterprise"
+            priceMonthly="4.997"
+            priceAnnual="3.997"
+            cta="Falar com o time"
+            items={[
+              "Tudo do Pro, mais:",
+              "Múltiplos usuários",
+              "Diagnóstico de implantação",
+              "Onboarding dedicado",
+              "SLA de suporte",
+            ]}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function PlanCard({
   name,
-  price,
-  priceHint = "/mês",
-  annual,
+  priceMonthly,
+  priceAnnual,
+  billing,
   items,
   cta,
   hero = false,
+  enterprise = false,
 }: {
   name: string;
-  price: string;
-  priceHint?: string;
-  annual: string;
+  priceMonthly: string;
+  priceAnnual: string;
+  billing: Billing;
   items: string[];
   cta: string;
   hero?: boolean;
+  enterprise?: boolean;
 }) {
-  const SaveBadge = (
-    <span
-      className="inline-block px-2.5 py-1 rounded-full text-[11px] font-bold ml-2"
-      style={{
-        background: hero ? "rgba(255,255,255,0.2)" : "#DCF5E6",
-        color: hero ? "#FFFFFF" : C.success,
-        letterSpacing: "0.04em",
-      }}
-    >
-      ECONOMIZE 20%
-    </span>
-  );
+  const isAnnual = billing === "annual";
+  const priceValue = isAnnual ? priceAnnual : priceMonthly;
+  const priceHint = enterprise
+    ? isAnnual
+      ? "/mês no plano anual · a partir de"
+      : "/mês · a partir de"
+    : isAnnual
+      ? "/mês no plano anual"
+      : "/mês";
+
+  const secondary = enterprise
+    ? isAnnual
+      ? `ou a partir de R$ ${priceMonthly}/mês no plano mensal`
+      : `ou a partir de R$ ${priceAnnual}/mês no plano anual (economize 20%)`
+    : isAnnual
+      ? `ou R$ ${priceMonthly}/mês no plano mensal`
+      : `ou R$ ${priceAnnual}/mês no plano anual (economize 20%)`;
 
   if (hero) {
     return (
@@ -1479,23 +1479,20 @@ function PlanCard({
         >
           MAIS ESCOLHIDO
         </div>
-        <div className="flex items-center mb-3">
-          <p
-            className="text-xs font-semibold uppercase"
-            style={{ letterSpacing: "0.18em", color: "rgba(255,255,255,0.85)" }}
-          >
-            {name}
-          </p>
-          {SaveBadge}
-        </div>
+        <p
+          className="text-xs font-semibold uppercase mb-3"
+          style={{ letterSpacing: "0.18em", color: "rgba(255,255,255,0.85)" }}
+        >
+          {name}
+        </p>
         <div className="flex items-baseline gap-2 mb-1 flex-wrap">
-          <span className="text-4xl font-bold">{price}</span>
+          <span className="text-4xl font-bold">R$ {priceValue}</span>
           <span className="text-sm" style={{ color: "rgba(255,255,255,0.85)" }}>
             {priceHint}
           </span>
         </div>
         <p className="text-sm mb-6" style={{ color: "rgba(255,255,255,0.7)" }}>
-          {annual}
+          {secondary}
         </p>
         <ul className="space-y-2.5 flex-1 mb-6">
           {items.map((it, i) => (
@@ -1528,25 +1525,22 @@ function PlanCard({
         boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
       }}
     >
-      <div className="flex items-center mb-3">
-        <p
-          className="text-xs font-semibold uppercase"
-          style={{ letterSpacing: "0.18em", color: C.text3 }}
-        >
-          {name}
-        </p>
-        {SaveBadge}
-      </div>
+      <p
+        className="text-xs font-semibold uppercase mb-3"
+        style={{ letterSpacing: "0.18em", color: C.text3 }}
+      >
+        {name}
+      </p>
       <div className="flex items-baseline gap-2 mb-1 flex-wrap">
         <span className="text-4xl font-bold" style={{ color: C.primary }}>
-          {price}
+          R$ {priceValue}
         </span>
         <span className="text-sm" style={{ color: C.text2 }}>
           {priceHint}
         </span>
       </div>
       <p className="text-sm mb-6" style={{ color: C.text2 }}>
-        {annual}
+        {secondary}
       </p>
       <ul className="space-y-2.5 flex-1 mb-6">
         {items.map((it, i) => (
