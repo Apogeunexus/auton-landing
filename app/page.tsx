@@ -1,13 +1,13 @@
 "use client";
 
 /**
- * Landing Auton Health — v5 (refinada)
+ * Landing Auton Health v5 (refinada)
  *
  * Evolução da v4 mantendo a essência (mesma estrutura + paleta azul/branco).
  * Novos elementos (baseados em Hormozi $100M Offers):
  *  - Barra de prova social acima da dobra
  *  - Seção de Fundadores (Barakat + Bonanza + USI)
- *  - Seção "Quanto vale" (Value Equation — ROI R$ 11.450)
+ *  - Seção "Quanto vale" (Value Equation, ROI R$ 11.450)
  *  - Bônus do plano anual
  *  - Selo "Economize 20%" nos preços anuais
  *  - Seção Garantia dedicada com selo
@@ -354,8 +354,8 @@ export default function HomePage() {
               nunca entregou: uma forma de{" "}
               <strong style={{ color: C.primary }}>
                 pensar o paciente inteiro, em tempo real, com método
-              </strong>{" "}
-              — e não com intuição solta.
+              </strong>
+              , e não com intuição solta.
             </p>
           </div>
         </div>
@@ -367,7 +367,7 @@ export default function HomePage() {
           <SectionTitle
             eyebrow="Quem criou"
             title="Três décadas de prática em saúde integrativa."
-            subtitle="O Método ADS foi codificado em IA pelos próprios criadores. Não é ChatGPT com avental — é décadas de prática clínica transformadas em ferramenta."
+            subtitle="O Método ADS foi codificado em IA pelos próprios criadores. Não é ChatGPT com avental. É décadas de prática clínica transformadas em ferramenta."
           />
           <div className="grid md:grid-cols-2 gap-8 mt-12">
             {[
@@ -377,7 +377,7 @@ export default function HomePage() {
                 bullets: [
                   "30+ anos em prática clínica integrativa",
                   "Fundador do Instituto Dr. Barakat (12 núcleos)",
-                  "Coautor do Método ADS — base clínica codificada na AI",
+                  "Coautor do Método ADS, base clínica codificada na AI",
                 ],
               },
               {
@@ -385,7 +385,7 @@ export default function HomePage() {
                 crm: "CRMBA 14684",
                 bullets: [
                   "20+ anos em prática clínica integrativa",
-                  "Diretor Acadêmico da USI — 3.000 profissionais formados",
+                  "Diretor Acadêmico da USI, 3.000 profissionais formados",
                   "Autor de 10+ livros publicados no Brasil e em Portugal",
                 ],
               },
@@ -447,14 +447,14 @@ export default function HomePage() {
           <SectionTitle
             eyebrow="Para quem"
             title="Auton com você em qualquer momento da sua carreira."
-            subtitle="Estudante, recém-formado, autônomo ou dono de clínica — a Auton se adapta ao seu momento."
+            subtitle="Estudante, recém-formado, autônomo ou dono de clínica. A Auton se adapta ao seu momento."
           />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
             {[
               {
                 icon: GraduationCap,
                 label: "Sou estudante",
-                desc: "Nossos agentes de IA combinam mais de 50 anos de experiência e prática clínica — e serão o seu companheiro nessa jornada.",
+                desc: "Nossos agentes de IA combinam mais de 50 anos de experiência e prática clínica, e serão o seu companheiro nessa jornada.",
               },
               {
                 icon: Sparkles,
@@ -464,7 +464,7 @@ export default function HomePage() {
               {
                 icon: Briefcase,
                 label: "Sou autônomo",
-                desc: "Nossa estrutura te ajuda a organizar o consultório e te prepara pro crescimento — sem virar administrador.",
+                desc: "Nossa estrutura te ajuda a organizar o consultório e te prepara pro crescimento, sem virar administrador.",
               },
               {
                 icon: Building2,
@@ -559,7 +559,7 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto">
             {[
-              { icon: Layers, title: "Integra dados clínicos fragmentados", desc: "Anamnese, exames, histórico, estilo de vida — tudo em um só mapa clínico." },
+              { icon: Layers, title: "Integra dados clínicos fragmentados", desc: "Anamnese, exames, histórico, estilo de vida: tudo em um só mapa clínico." },
               { icon: Brain, title: "Estrutura o raciocínio clínico em tempo real", desc: "Durante a consulta, não horas depois no caderno em casa." },
               { icon: Microscope, title: "Revela padrões fisiopatológicos invisíveis", desc: "Correlações entre sistemas que a análise tradicional perde." },
               { icon: HeartPulse, title: "Constrói tratamentos personalizados da causa raiz", desc: "Sugestões terapêuticas que consideram o paciente inteiro." },
@@ -702,7 +702,7 @@ export default function HomePage() {
           <SectionTitle
             eyebrow="Abordagem multidisciplinar integrada"
             title="Centenas de agentes de IA como uma equipe multidisciplinar invisível."
-            subtitle="A Auton é composta por centenas de agentes especializados, organizados em camadas clínicas. Trabalham de forma orquestrada, disponíveis 24/7 — cada um responsável por uma parte do raciocínio integrativo."
+            subtitle="A Auton é composta por centenas de agentes especializados, organizados em camadas clínicas. Trabalham de forma orquestrada, disponíveis 24/7, cada um responsável por uma parte do raciocínio integrativo."
           />
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto">
             {[
@@ -746,7 +746,7 @@ export default function HomePage() {
           <SectionTitle
             eyebrow="Método ADS"
             title="O que é o Método ADS."
-            subtitle="Três passos clínicos estruturados — codificados em IA pelos próprios criadores."
+            subtitle="Três passos clínicos estruturados, codificados em IA pelos próprios criadores."
           />
           <div className="space-y-6 mt-12">
             {[
@@ -836,7 +836,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* O QUE VOCÊ GANHA COM A AUTON (refinada — honesta, auditável) */}
+      {/* O QUE VOCÊ GANHA COM A AUTON (refinada, honesta, auditável) */}
       <section className="py-24" style={{ background: C.card }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
@@ -865,7 +865,7 @@ export default function HomePage() {
                 className="text-xs font-semibold uppercase"
                 style={{ letterSpacing: "0.18em", color: C.primary }}
               >
-                Ganho direto — mensurável
+                Ganho direto e mensurável
               </p>
             </div>
 
@@ -880,7 +880,7 @@ export default function HomePage() {
 
             <p className="text-lg leading-relaxed mb-8" style={{ color: C.text2 }}>
               Prontuário automático, anamnese estruturada e análise de exames pela IA. Você termina
-              a consulta com o laudo pronto — e usa o tempo que sobra pra atender mais, estudar ou
+              a consulta com o laudo pronto. E usa o tempo que sobra pra atender mais, estudar ou
               descansar.
             </p>
 
@@ -943,7 +943,7 @@ export default function HomePage() {
                 {
                   icon: Sparkles,
                   title: "Autoridade e indicação espontânea",
-                  desc: "Casos documentados e raciocínio estruturado aumentam sua reputação — e as indicações vêm junto.",
+                  desc: "Casos documentados e raciocínio estruturado aumentam sua reputação, e as indicações vêm junto.",
                 },
               ].map((c, i) => (
                 <div
@@ -996,7 +996,7 @@ export default function HomePage() {
             Você tem <strong style={{ color: C.text }}>7 dias de garantia incondicional</strong>.
             Se em uma semana a Auton não entregar o que você viu aqui, responde o email do
             onboarding e devolvemos 100% do valor. Sem pergunta, sem formulário, sem burocracia.
-            O risco fica com a gente — porque confiamos no que construímos.
+            O risco fica com a gente. Porque confiamos no que construímos.
           </p>
         </div>
       </section>
@@ -1020,15 +1020,15 @@ export default function HomePage() {
               },
               {
                 q: "Não tenho tempo para análise profunda em cada consulta.",
-                a: "Exatamente pra isso o AI ADS existe. Ele analisa exames, cruza com histórico e entrega hipóteses ranqueadas em até 5 minutos depois da consulta — você só valida e ajusta. O raciocínio clínico é seu, o trabalho pesado é dele.",
+                a: "Exatamente pra isso o AI ADS existe. Ele analisa exames, cruza com histórico e entrega hipóteses ranqueadas em até 5 minutos depois da consulta. Você só valida e ajusta. O raciocínio clínico é seu, o trabalho pesado é dele.",
               },
               {
                 q: "Meu paciente não adere ao protocolo em casa.",
-                a: "O App do Paciente puxa o protocolo gerado no consultório e entrega em formato de rotina — com check-in diário, lembretes e relatório antes/depois. Você acompanha a adesão em tempo real pelo dashboard.",
+                a: "O App do Paciente puxa o protocolo gerado no consultório e entrega em formato de rotina, com check-in diário, lembretes e relatório antes/depois. Você acompanha a adesão em tempo real pelo dashboard.",
               },
               {
                 q: "Meu conselho profissional pode questionar o uso de IA?",
-                a: "Todos os planos anuais vêm com parecer jurídico pronto pelos conselhos CFM/CFN/CFP e biblioteca de compliance. A AI ADS é apoio à decisão clínica — o raciocínio final é sempre do profissional.",
+                a: "Todos os planos anuais vêm com parecer jurídico pronto pelos conselhos CFM/CFN/CFP e biblioteca de compliance. A AI ADS é apoio à decisão clínica. O raciocínio final é sempre do profissional.",
               },
               {
                 q: "Já uso outro sistema. Não quero migrar.",
@@ -1036,7 +1036,7 @@ export default function HomePage() {
               },
               {
                 q: "Meus dados clínicos estão seguros?",
-                a: "Sim. A Auton está em conformidade com a LGPD, dados criptografados em trânsito e em repouso, servidores no Brasil e acesso auditável. Segurança clínica não é diferencial — é pré-requisito.",
+                a: "Sim. A Auton está em conformidade com a LGPD, dados criptografados em trânsito e em repouso, servidores no Brasil e acesso auditável. Segurança clínica não é diferencial. É pré-requisito.",
               },
             ].map((item, i) => (
               <FAQItem key={i} q={item.q} a={item.a} />
@@ -1056,7 +1056,7 @@ export default function HomePage() {
           <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-6 px-6 mt-12">
             {[
               { name: "Dra. Paula", role: "Nutricionista integrativa", city: "São Paulo, SP", quote: "Recuperei 6h da minha semana só no prontuário. O paciente percebeu a diferença na 2ª consulta." },
-              { name: "Dr. Caio", role: "Médico", city: "Belo Horizonte, MG", quote: "Pela primeira vez tenho um raciocínio de causa raiz estruturado — e o paciente continua engajado em casa." },
+              { name: "Dr. Caio", role: "Médico", city: "Belo Horizonte, MG", quote: "Pela primeira vez tenho um raciocínio de causa raiz estruturado, e o paciente continua engajado em casa." },
               { name: "Dra. Juliana", role: "Biomédica integrativa", city: "Porto Alegre, RS", quote: "Parei de ter aquela sensação de que tô vendendo consulta. Volto pra casa sentindo que resolvi." },
               { name: "Dra. Marina", role: "Médica integrativa", city: "Curitiba, PR", quote: "A Auton trouxe método para algo que eu fazia por intuição. Meu raciocínio clínico amadureceu em meses." },
               { name: "Dr. Rafael", role: "Nutrólogo", city: "Florianópolis, SC", quote: "Meus pacientes complexos finalmente têm um caminho claro. E eu não preciso mais levar caso pra casa." },
@@ -1111,14 +1111,14 @@ export default function HomePage() {
           />
           <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-6 px-6 mt-12">
             {[
-              { icon: Brain, title: "AI ADS — motor clínico", desc: "Raciocina no modelo Análise → Diagnóstico → Solução em tempo real durante a consulta." },
-              { icon: FlaskConical, title: "Leitura funcional de exames", desc: "Interpreta biomarcadores dentro do contexto individual — não só faixas de referência." },
+              { icon: Brain, title: "AI ADS, motor clínico", desc: "Raciocina no modelo Análise → Diagnóstico → Solução em tempo real durante a consulta." },
+              { icon: FlaskConical, title: "Leitura funcional de exames", desc: "Interpreta biomarcadores dentro do contexto individual, não só faixas de referência." },
               { icon: ClipboardList, title: "Protocolo personalizado", desc: "Plano terapêutico integrativo gerado e priorizado pela IA, pronto pra sua revisão." },
               { icon: FileText, title: "Prontuário automático", desc: "A teleconsulta gera o prontuário sozinha. Você foca no paciente, não no teclado." },
               { icon: Smartphone, title: "App do paciente", desc: "Check-in diário, relatórios antes/depois, adesão em tempo real." },
               { icon: Network, title: "Rede multidisciplinar", desc: "Encaminhe pacientes para colegas integrativos. Seja encaminhado. Ganhe junto." },
               { icon: MessageSquare, title: "Comunidade fechada", desc: "Discussão clínica séria, só com profissionais. Sem ruído, sem exposição." },
-              { icon: Layers, title: "Camadas clínicas integradas", desc: "Metabolismo, hormônios, intestino, inflamação, mente — todos conversando." },
+              { icon: Layers, title: "Camadas clínicas integradas", desc: "Metabolismo, hormônios, intestino, inflamação, mente. Todos conversando." },
             ].map((f, i) => (
               <div
                 key={i}
