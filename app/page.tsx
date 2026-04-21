@@ -1,22 +1,18 @@
 "use client";
 
 /**
- * Landing — /fundadora (v4)
+ * Landing Auton Health — v5 (refinada)
  *
- * Paleta rigorosamente AZUL + BRANCO (Auton Health DS).
- * Cores aplicadas via hex diretos (fallback seguro, independente de CSS vars).
- *
- * Paleta oficial:
- *  #EBF3F6 — background global
- *  #D6E8F0 — seções destacadas
- *  #FFFFFF — cards
- *  #1e3a5f — Auton Blue (CTAs, ícones, destaques)
- *  #2d4a6f — hover
- *  #4FA2FF — azul médio (acentos suaves)
- *  #C4D9E5 — bordas
- *  #1A1A1A — texto primary
- *  #5B5B5B — texto secondary
- *  #7A7A7A — texto tertiary
+ * Evolução da v4 mantendo a essência (mesma estrutura + paleta azul/branco).
+ * Novos elementos (baseados em Hormozi $100M Offers):
+ *  - Barra de prova social acima da dobra
+ *  - Seção de Fundadores (Barakat + Bonanza + USI)
+ *  - Seção "Quanto vale" (Value Equation — ROI R$ 11.450)
+ *  - Bônus do plano anual
+ *  - Selo "Economize 20%" nos preços anuais
+ *  - Seção Garantia dedicada com selo
+ *  - FAQ com 6 dealbreakers
+ *  - Nav atualizado (Propósito / Para quem / Soluções / Método / Planos / Garantia)
  */
 
 import { useState } from "react";
@@ -53,22 +49,30 @@ import {
   Layers,
   Droplets,
   Utensils,
+  Stethoscope,
+  BookOpen,
+  Plus,
+  Minus,
+  Scale,
+  FileCheck,
+  Gift,
 } from "lucide-react";
 
-// Paleta
+// Paleta Auton Health (hex diretos, independem de CSS vars)
 const C = {
   bg: "#EBF3F6",
   bg2: "#D6E8F0",
   card: "#FFFFFF",
   primary: "#1e3a5f",
   primaryHover: "#2d4a6f",
-  primarySoft: "#E0ECF5", // azul-claríssimo pra ícones em círculo
+  primarySoft: "#E0ECF5",
   accent: "#4FA2FF",
   border: "#C4D9E5",
   text: "#1A1A1A",
   text2: "#5B5B5B",
   text3: "#7A7A7A",
   error: "#EF4444",
+  success: "#15803D",
 };
 
 // ============================================================
@@ -78,9 +82,9 @@ const C = {
 const NAV_LINKS = [
   { label: "Para quem", href: "#para-quem" },
   { label: "Soluções", href: "#solucoes" },
-  { label: "Comunidade", href: "#comunidade" },
-  { label: "Sobre nós", href: "#sobre" },
+  { label: "Método ADS", href: "#metodo" },
   { label: "Planos", href: "#planos" },
+  { label: "Garantia", href: "#garantia" },
 ];
 
 function Nav() {
@@ -94,7 +98,6 @@ function Nav() {
         <a href="#top" className="font-bold text-xl" style={{ color: C.primary }}>
           Auton
         </a>
-
         <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((l) => (
             <a
@@ -106,16 +109,16 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <button
+          <a
+            href="#planos"
             className="px-4 py-2 rounded-[14px] text-white text-sm font-semibold transition-colors"
             style={{ background: C.primary }}
             onMouseEnter={(e) => (e.currentTarget.style.background = C.primaryHover)}
             onMouseLeave={(e) => (e.currentTarget.style.background = C.primary)}
           >
             Começar agora
-          </button>
+          </a>
         </div>
-
         <button
           className="md:hidden"
           onClick={() => setOpen((v) => !v)}
@@ -125,7 +128,6 @@ function Nav() {
           {open ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
         </button>
       </div>
-
       {open && (
         <div
           className="md:hidden border-t px-6 py-4"
@@ -143,12 +145,14 @@ function Nav() {
                 {l.label}
               </a>
             ))}
-            <button
-              className="w-full py-3 rounded-[14px] text-white font-semibold"
+            <a
+              href="#planos"
+              onClick={() => setOpen(false)}
+              className="w-full py-3 rounded-[14px] text-white font-semibold text-center"
               style={{ background: C.primary }}
             >
               Começar agora
-            </button>
+            </a>
           </div>
         </div>
       )}
@@ -157,27 +161,30 @@ function Nav() {
 }
 
 // ============================================================
-// BUTTONS
+// BOTÕES
 // ============================================================
 
 function PrimaryBtn({
   children,
   big = false,
   onWhiteBg = false,
+  href = "#planos",
 }: {
   children: React.ReactNode;
   big?: boolean;
   onWhiteBg?: boolean;
+  href?: string;
 }) {
   const bg = onWhiteBg ? "#FFFFFF" : C.primary;
   const color = onWhiteBg ? C.primary : "#FFFFFF";
   return (
-    <button
+    <a
+      href={href}
       className={`${big ? "px-8 py-5 text-base" : "px-6 py-3 text-sm"} rounded-[14px] font-semibold shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition-all hover:shadow-[0_18px_44px_rgba(0,0,0,0.18)] inline-flex items-center gap-2`}
       style={{ background: bg, color }}
     >
       {children}
-    </button>
+    </a>
   );
 }
 
@@ -185,20 +192,23 @@ function OutlineBtn({
   children,
   big = false,
   onDarkBg = false,
+  href = "#solucoes",
 }: {
   children: React.ReactNode;
   big?: boolean;
   onDarkBg?: boolean;
+  href?: string;
 }) {
   const border = onDarkBg ? "rgba(255,255,255,0.4)" : C.primary;
   const color = onDarkBg ? "#FFFFFF" : C.primary;
   return (
-    <button
+    <a
+      href={href}
       className={`${big ? "px-8 py-5 text-base" : "px-6 py-3 text-sm"} rounded-[14px] font-semibold border-2 transition-all inline-flex items-center gap-2 hover:opacity-80`}
       style={{ borderColor: border, color, background: "transparent" }}
     >
       {children}
-    </button>
+    </a>
   );
 }
 
@@ -219,7 +229,9 @@ const SectionTitle = ({
   align?: "left" | "center";
   onDark?: boolean;
 }) => (
-  <div className={`max-w-3xl mb-12 ${align === "center" ? "mx-auto text-center" : ""}`}>
+  <div
+    className={`max-w-3xl mb-12 ${align === "center" ? "mx-auto text-center" : ""}`}
+  >
     {eyebrow && (
       <p
         className="text-xs font-semibold uppercase mb-4"
@@ -252,21 +264,18 @@ const SectionTitle = ({
 // PAGE
 // ============================================================
 
-export default function FundadoraPage() {
+export default function HomePage() {
   return (
     <main id="top" className="min-h-screen" style={{ background: C.bg, color: C.text }}>
       <Nav />
 
-      {/* ========================================================
-          HERO
-      ======================================================== */}
+      {/* HERO */}
       <section
         className="relative min-h-screen flex items-center pt-24 overflow-hidden"
         style={{
           background: `linear-gradient(135deg, ${C.primary} 0%, ${C.primaryHover} 50%, #3a5e88 100%)`,
         }}
       >
-        {/* Pattern sutil pra dar textura */}
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -274,7 +283,6 @@ export default function FundadoraPage() {
               "radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(79,162,255,0.25) 0%, transparent 50%)",
           }}
         />
-
         <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
           <div
             className="inline-block mb-6 px-4 py-1.5 rounded-full text-xs font-semibold"
@@ -293,8 +301,8 @@ export default function FundadoraPage() {
             className="text-4xl md:text-6xl font-bold leading-[1.1] max-w-4xl mb-6 tracking-tight"
             style={{ color: "#FFFFFF" }}
           >
-            A primeira IA focada 100% em ajudar profissionais da saúde a
-            identificar e tratar a <span style={{ color: "#A8D0F0" }}>causa raiz</span>.
+            A primeira IA focada 100% em ajudar profissionais da saúde a identificar e tratar a{" "}
+            <span style={{ color: "#A8D0F0" }}>causa raiz</span>.
           </h1>
 
           <p
@@ -320,10 +328,43 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          PROPÓSITO
-      ======================================================== */}
-      <section className="py-24" style={{ background: C.card }}>
+      {/* BARRA DE PROVA SOCIAL (NOVA) */}
+      <section className="py-14 border-b" style={{ background: C.card, borderColor: C.border }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <p
+            className="text-center text-xs font-semibold uppercase mb-10"
+            style={{ letterSpacing: "0.18em", color: C.text3 }}
+          >
+            Credenciais e autoridade
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { num: "3.000", label: "profissionais formados\nno Método ADS via USI" },
+              { num: "100+", label: "profissionais em\nprática clínica diária" },
+              { num: "60", label: "betas validaram o\nmotor AI ADS" },
+              { num: "até 80%", label: "redução no tempo de\ndocumentação clínica*" },
+            ].map((m, i) => (
+              <div key={i}>
+                <p className="text-4xl font-bold" style={{ color: C.primary }}>
+                  {m.num}
+                </p>
+                <p
+                  className="text-sm mt-2 leading-snug whitespace-pre-line"
+                  style={{ color: C.text2 }}
+                >
+                  {m.label}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-center mt-8" style={{ color: C.text3 }}>
+            * Base: 60 profissionais em fase beta, 90 dias de uso contínuo
+          </p>
+        </div>
+      </section>
+
+      {/* PROPÓSITO */}
+      <section className="py-24" style={{ background: C.bg }}>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p
             className="text-xs font-semibold uppercase mb-6"
@@ -339,22 +380,103 @@ export default function FundadoraPage() {
           </h2>
           <div className="space-y-5 text-lg md:text-xl leading-relaxed" style={{ color: C.text2 }}>
             <p>
-              Chega de <strong style={{ color: C.text }}>tentativa e erro disfarçada de ciência</strong>.
+              Chega de{" "}
+              <strong style={{ color: C.text }}>tentativa e erro disfarçada de ciência</strong>.
             </p>
             <p>Chega de tratar sintomas e ignorar a causa.</p>
             <p className="pt-4">
               A Auton nasceu para dar ao profissional de saúde a estrutura que a medicina moderna
               nunca entregou: uma forma de{" "}
-              <strong style={{ color: C.primary }}>pensar o paciente inteiro, em tempo real, com método</strong>{" "}
+              <strong style={{ color: C.primary }}>
+                pensar o paciente inteiro, em tempo real, com método
+              </strong>{" "}
               — e não com intuição solta.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ========================================================
-          PARA QUEM
-      ======================================================== */}
+      {/* FUNDADORES (NOVA) */}
+      <section className="py-24" style={{ background: C.card }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionTitle
+            eyebrow="Quem criou"
+            title="30+ anos de medicina integrativa. 3.000 profissionais formados."
+            subtitle="O Método ADS foi codificado em IA pelos próprios criadores. Não é ChatGPT com avental — é décadas de prática clínica transformadas em ferramenta."
+          />
+          <div className="grid md:grid-cols-2 gap-8 mt-12">
+            {[
+              {
+                name: "Dr. Mohamad Barakat",
+                crm: "CRM SP 68874",
+                bullets: [
+                  "30+ anos em medicina integrativa e clínica",
+                  "Fundador do Instituto Dr. Barakat (12 núcleos)",
+                  "Coautor do Método ADS — base clínica codificada na AI",
+                ],
+              },
+              {
+                name: "Dr. Marcelo Bonanza",
+                crm: "CRMBA 14684",
+                bullets: [
+                  "20+ anos em medicina integrativa",
+                  "Diretor Acadêmico da USI — 3.000 profissionais formados",
+                  "Autor de 10+ livros publicados no Brasil e em Portugal",
+                ],
+              },
+            ].map((f, i) => (
+              <div
+                key={i}
+                className="rounded-[24px] overflow-hidden"
+                style={{
+                  background: C.bg,
+                  border: `1px solid ${C.border}`,
+                  boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
+                }}
+              >
+                <div
+                  className="aspect-[4/3] flex items-center justify-center"
+                  style={{ background: C.bg2 }}
+                >
+                  <Stethoscope className="w-20 h-20" style={{ color: C.primary, opacity: 0.35 }} />
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-1" style={{ color: C.text }}>
+                    {f.name}
+                  </h3>
+                  <div
+                    className="inline-block mb-5 px-3 py-1 rounded-full text-xs font-semibold"
+                    style={{
+                      background: C.primarySoft,
+                      color: C.primary,
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    {f.crm}
+                  </div>
+                  <ul className="space-y-3">
+                    {f.bullets.map((b, j) => (
+                      <li
+                        key={j}
+                        className="flex items-start gap-3 text-sm leading-relaxed"
+                        style={{ color: C.text2 }}
+                      >
+                        <CheckCircle2
+                          className="w-4 h-4 mt-0.5 shrink-0"
+                          style={{ color: C.primary }}
+                        />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PARA QUEM */}
       <section id="para-quem" className="py-24" style={{ background: C.bg }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
@@ -362,7 +484,6 @@ export default function FundadoraPage() {
             title="Auton com você em qualquer momento da sua carreira."
             subtitle="Estudante, recém-formado, autônomo ou dono de clínica — a Auton se adapta ao seu momento."
           />
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
             {[
               {
@@ -413,9 +534,7 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          PROBLEMAS
-      ======================================================== */}
+      {/* PROBLEMAS */}
       <section className="py-24" style={{ background: C.bg2 }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
@@ -455,9 +574,7 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          COMO RESOLVEMOS
-      ======================================================== */}
+      {/* COMO RESOLVEMOS */}
       <section className="py-24" style={{ background: C.bg }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center mb-12">
@@ -475,29 +592,12 @@ export default function FundadoraPage() {
               biológica e pensar a causa raiz em tempo real. A Auton faz exatamente isso.
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto">
             {[
-              {
-                icon: Layers,
-                title: "Integra dados clínicos fragmentados",
-                desc: "Anamnese, exames, histórico, estilo de vida — tudo em um só mapa clínico.",
-              },
-              {
-                icon: Brain,
-                title: "Estrutura o raciocínio clínico em tempo real",
-                desc: "Durante a consulta, não horas depois no caderno em casa.",
-              },
-              {
-                icon: Microscope,
-                title: "Revela padrões fisiopatológicos invisíveis",
-                desc: "Correlações entre sistemas que a análise tradicional perde.",
-              },
-              {
-                icon: HeartPulse,
-                title: "Constrói tratamentos personalizados da causa raiz",
-                desc: "Sugestões terapêuticas que consideram o paciente inteiro.",
-              },
+              { icon: Layers, title: "Integra dados clínicos fragmentados", desc: "Anamnese, exames, histórico, estilo de vida — tudo em um só mapa clínico." },
+              { icon: Brain, title: "Estrutura o raciocínio clínico em tempo real", desc: "Durante a consulta, não horas depois no caderno em casa." },
+              { icon: Microscope, title: "Revela padrões fisiopatológicos invisíveis", desc: "Correlações entre sistemas que a análise tradicional perde." },
+              { icon: HeartPulse, title: "Constrói tratamentos personalizados da causa raiz", desc: "Sugestões terapêuticas que consideram o paciente inteiro." },
             ].map((item, i) => (
               <div
                 key={i}
@@ -523,7 +623,6 @@ export default function FundadoraPage() {
               </div>
             ))}
           </div>
-
           <div className="mt-16 max-w-4xl mx-auto">
             <p
               className="text-center text-sm font-semibold uppercase mb-6"
@@ -556,9 +655,7 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          TAG DE TRANSIÇÃO
-      ======================================================== */}
+      {/* TAG TRANSIÇÃO */}
       <section className="py-16" style={{ background: C.primary }}>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-2xl md:text-4xl font-bold tracking-wide" style={{ color: "#FFFFFF" }}>
@@ -569,9 +666,7 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          8 CAPACIDADES
-      ======================================================== */}
+      {/* 8 CAPACIDADES */}
       <section id="solucoes" className="py-24" style={{ background: C.card }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
@@ -579,93 +674,16 @@ export default function FundadoraPage() {
             title="O que a Auton Health entrega no seu dia a dia."
             subtitle="Oito capacidades integradas que transformam sua forma de atender."
           />
-
           <div className="space-y-6 mt-12">
             {[
-              {
-                n: "01",
-                icon: FlaskConical,
-                title: "Análise integrativa de exames laboratoriais",
-                bullets: [
-                  "Correlação entre múltiplos biomarcadores (isolados e em conjunto)",
-                  "Identificação de padrões ocultos (inflamação silenciosa, resistência imunológica, disfunções hormonais, eixos intestino-cérebro, mitocôndria)",
-                  "Detecção de causas raiz que passariam despercebidas na análise tradicional",
-                ],
-              },
-              {
-                n: "02",
-                icon: Brain,
-                title: "Método ADS codificado (Análise → Diagnóstico → Solução)",
-                bullets: [
-                  "Anamnese integrativa estruturada (física, metabólica, emocional, comportamental)",
-                  "Raciocínio clínico estruturado e replicável",
-                  "Guias inteligentes que conduzem o raciocínio clínico",
-                  "Padronização do pensamento integrativo sem engessar a consulta",
-                  "Priorização do que tratar primeiro (ordem terapêutica correta)",
-                ],
-              },
-              {
-                n: "03",
-                icon: Video,
-                title: "Teleconsulta com IA para apoio à decisão clínica",
-                bullets: [
-                  "Teleconsulta integrada à Auton Health",
-                  "O prontuário é preenchido automaticamente",
-                  "Os agentes analisam dados em tempo real",
-                  "Você foca onde realmente precisa",
-                ],
-              },
-              {
-                n: "04",
-                icon: Sparkles,
-                title: "Base de conhecimento aplicada (agentes integrativos)",
-                bullets: [
-                  "Digite sua pergunta e receba recomendações instantâneas e claras",
-                  "Ajuda você a criar estratégias de atendimento em minutos",
-                  "Protocolos atualizados com base em estudos de caso",
-                ],
-              },
-              {
-                n: "05",
-                icon: ClipboardList,
-                title: "Soluções terapêuticas personalizadas",
-                bullets: [
-                  "Protocolos com base em evidência científica, experiência clínica real e visão sistêmica do paciente",
-                  "Sugestão de intervenções integradas",
-                  "Construção de planos de tratamento da causa raiz",
-                  "Sempre respeitando escopo legal, segurança e personalização",
-                ],
-              },
-              {
-                n: "06",
-                icon: MessageSquare,
-                title: "Comunidade fechada e exclusiva",
-                bullets: [
-                  "Tire dúvidas e compartilhe experiências com colegas integrativos",
-                  "Acesso a casos clínicos discutidos por pares",
-                  "Espaço seguro, sem ruído de redes abertas",
-                ],
-              },
-              {
-                n: "07",
-                icon: Network,
-                title: "Rede de apoio multidisciplinar",
-                bullets: [
-                  "Contrate colegas integrativos e amplie seus protocolos",
-                  "Seja contratado e aumente sua receita",
-                  "Encaminhamentos inteligentes com base no caso clínico",
-                ],
-              },
-              {
-                n: "08",
-                icon: Calendar,
-                title: "Controle da sua agenda",
-                bullets: [
-                  "Controle sua agenda e organize seus atendimentos",
-                  "Notificações automáticas para o paciente",
-                  "Visão consolidada do seu tempo clínico",
-                ],
-              },
+              { n: "01", icon: FlaskConical, title: "Análise integrativa de exames laboratoriais", bullets: ["Correlação entre múltiplos biomarcadores (isolados e em conjunto)", "Identificação de padrões ocultos (inflamação silenciosa, resistência imunológica, disfunções hormonais, eixos intestino-cérebro, mitocôndria)", "Detecção de causas raiz que passariam despercebidas na análise tradicional"] },
+              { n: "02", icon: Brain, title: "Método ADS codificado (Análise → Diagnóstico → Solução)", bullets: ["Anamnese integrativa estruturada (física, metabólica, emocional, comportamental)", "Raciocínio clínico estruturado e replicável", "Guias inteligentes que conduzem o raciocínio clínico", "Padronização do pensamento integrativo sem engessar a consulta", "Priorização do que tratar primeiro (ordem terapêutica correta)"] },
+              { n: "03", icon: Video, title: "Teleconsulta com IA para apoio à decisão clínica", bullets: ["Teleconsulta integrada à Auton Health", "O prontuário é preenchido automaticamente", "Os agentes analisam dados em tempo real", "Você foca onde realmente precisa"] },
+              { n: "04", icon: Sparkles, title: "Base de conhecimento aplicada (agentes integrativos)", bullets: ["Digite sua pergunta e receba recomendações instantâneas e claras", "Ajuda você a criar estratégias de atendimento em minutos", "Protocolos atualizados com base em estudos de caso"] },
+              { n: "05", icon: ClipboardList, title: "Soluções terapêuticas personalizadas", bullets: ["Protocolos com base em evidência científica, experiência clínica real e visão sistêmica do paciente", "Sugestão de intervenções integradas", "Construção de planos de tratamento da causa raiz", "Sempre respeitando escopo legal, segurança e personalização"] },
+              { n: "06", icon: MessageSquare, title: "Comunidade fechada e exclusiva", bullets: ["Tire dúvidas e compartilhe experiências com colegas integrativos", "Acesso a casos clínicos discutidos por pares", "Espaço seguro, sem ruído de redes abertas"] },
+              { n: "07", icon: Network, title: "Rede de apoio multidisciplinar", bullets: ["Contrate colegas integrativos e amplie seus protocolos", "Seja contratado e aumente sua receita", "Encaminhamentos inteligentes com base no caso clínico"] },
+              { n: "08", icon: Calendar, title: "Controle da sua agenda", bullets: ["Controle sua agenda e organize seus atendimentos", "Notificações automáticas para o paciente", "Visão consolidada do seu tempo clínico"] },
             ].map((cap) => (
               <div
                 key={cap.n}
@@ -713,17 +731,14 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          9 DOMÍNIOS CLÍNICOS
-      ======================================================== */}
-      <section id="sobre" className="py-24" style={{ background: C.bg2 }}>
+      {/* 9 DOMÍNIOS CLÍNICOS */}
+      <section className="py-24" style={{ background: C.bg2 }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
             eyebrow="Abordagem multidisciplinar integrada"
             title="Centenas de agentes de IA como uma equipe multidisciplinar invisível."
             subtitle="A Auton é composta por centenas de agentes especializados, organizados em camadas clínicas. Trabalham de forma orquestrada, disponíveis 24/7 — cada um responsável por uma parte do raciocínio integrativo."
           />
-
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto">
             {[
               { icon: Activity, label: "Metabolismo" },
@@ -760,17 +775,14 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          MÉTODO ADS
-      ======================================================== */}
-      <section className="py-24" style={{ background: C.bg }}>
+      {/* MÉTODO ADS */}
+      <section id="metodo" className="py-24" style={{ background: C.bg }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
             eyebrow="Método ADS"
             title="O que é o Método ADS."
             subtitle="Três passos clínicos estruturados — codificados em IA pelos próprios criadores."
           />
-
           <div className="space-y-6 mt-12">
             {[
               {
@@ -823,10 +835,7 @@ export default function FundadoraPage() {
                   style={{ background: C.primary }}
                 >
                   <div className="text-center">
-                    <p
-                      className="text-6xl font-bold leading-none"
-                      style={{ color: "#FFFFFF" }}
-                    >
+                    <p className="text-6xl font-bold leading-none" style={{ color: "#FFFFFF" }}>
                       {step.letter}
                     </p>
                     <p
@@ -862,9 +871,164 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          PLANOS
-      ======================================================== */}
+      {/* VALUE EQUATION / ROI (NOVA) */}
+      <section className="py-24" style={{ background: C.card }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionTitle
+            eyebrow="Quanto vale na sua prática"
+            title="A conta que o profissional não faz — e devia fazer."
+            subtitle="Todo mês, a Auton devolve muito mais do que custa. Quatro ganhos concretos, quantificados."
+          />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            {[
+              {
+                icon: TrendingUp,
+                value: "R$ 8.750",
+                label: "Tempo economizado",
+                desc: "Até 50% menos tempo em documentação e análise. 17,5h/mês a R$ 500/h.",
+              },
+              {
+                icon: Network,
+                value: "R$ 2.720",
+                label: "Renda nova via rede",
+                desc: "8 encaminhamentos/mês × R$ 400 × 85% pro profissional.",
+              },
+              {
+                icon: HeartPulse,
+                value: "R$ 1.000",
+                label: "Retenção de pacientes",
+                desc: "Adesão maior → pacientes ficam mais consultas.",
+              },
+              {
+                icon: Sparkles,
+                value: "R$ 1.000",
+                label: "Autoridade e cases",
+                desc: "Comunidade + casos documentados = indicação espontânea.",
+              },
+            ].map((d, i) => (
+              <div
+                key={i}
+                className="p-6 rounded-[24px]"
+                style={{
+                  background: C.bg,
+                  border: `1px solid ${C.border}`,
+                  boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
+                }}
+              >
+                <div
+                  className="w-12 h-12 rounded-[14px] flex items-center justify-center mb-4"
+                  style={{ background: C.primarySoft }}
+                >
+                  <d.icon className="w-6 h-6" style={{ color: C.primary }} />
+                </div>
+                <p className="text-3xl font-bold mb-1" style={{ color: C.primary }}>
+                  {d.value}
+                </p>
+                <p className="text-sm font-semibold mb-2" style={{ color: C.text }}>
+                  {d.label}
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: C.text2 }}>
+                  {d.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* ROI Box */}
+          <div
+            className="mt-12 rounded-[24px] p-10 text-center max-w-4xl mx-auto"
+            style={{
+              background: C.primary,
+              boxShadow: "0 18px 44px rgba(0,0,0,0.18)",
+            }}
+          >
+            <p
+              className="text-xs font-semibold uppercase mb-4"
+              style={{ letterSpacing: "0.18em", color: "rgba(255,255,255,0.7)" }}
+            >
+              Valor percebido mensal
+            </p>
+            <p className="text-5xl md:text-6xl font-bold mb-3" style={{ color: "#FFFFFF" }}>
+              R$ 11.450<span className="text-2xl font-normal">/mês</span>
+            </p>
+            <p className="text-lg mb-6" style={{ color: "rgba(255,255,255,0.85)" }}>
+              Com base nos 4 drivers × 85% de confiança (apuração conservadora).
+            </p>
+            <div className="h-px my-6" style={{ background: "rgba(255,255,255,0.15)" }} />
+            <p className="text-base" style={{ color: "rgba(255,255,255,0.8)" }}>
+              Assinatura do plano Pro:{" "}
+              <span className="font-semibold" style={{ color: "#FFFFFF" }}>
+                R$ 1.197/mês no anual
+              </span>{" "}
+              →{" "}
+              <span className="font-bold text-xl" style={{ color: "#A8D0F0" }}>
+                ROI de 9,5×
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* BÔNUS DO ANUAL (NOVA) */}
+      <section className="py-20" style={{ background: C.bg }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionTitle
+            eyebrow="Bônus inclusos no plano anual"
+            title="Quem assina o anual, leva junto."
+            subtitle="Quatro bônus que fortalecem sua prática imediatamente — sem custo adicional."
+          />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            {[
+              {
+                icon: Scale,
+                title: "Parecer jurídico + compliance",
+                desc: "Material pronto para os conselhos CFM/CFN/CFP sobre uso de IA clínica.",
+              },
+              {
+                icon: FileCheck,
+                title: "PDF cálculo de ROI",
+                desc: "Documento de 1 página pra alinhar investimento com sócio ou família.",
+              },
+              {
+                icon: Play,
+                title: "3 depoimentos em vídeo",
+                desc: "Cases reais de profissionais que saíram de vender consulta pra resolver casos.",
+              },
+              {
+                icon: Gift,
+                title: "Onboarding concierge 1:1",
+                desc: "Call dedicada na 1ª semana + migração gratuita em 48h.",
+              },
+            ].map((b, i) => (
+              <div
+                key={i}
+                className="p-6 rounded-[24px]"
+                style={{
+                  background: C.card,
+                  border: `1px solid ${C.border}`,
+                  boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
+                }}
+              >
+                <div
+                  className="w-11 h-11 rounded-[14px] flex items-center justify-center mb-4"
+                  style={{ background: C.primarySoft }}
+                >
+                  <b.icon className="w-5 h-5" style={{ color: C.primary }} />
+                </div>
+                <h3 className="text-base font-semibold mb-2" style={{ color: C.text }}>
+                  {b.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: C.text2 }}>
+                  {b.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PLANOS */}
       <section id="planos" className="py-24" style={{ background: C.bg2 }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
@@ -872,7 +1036,6 @@ export default function FundadoraPage() {
             title="Selecione o seu plano Auton."
             subtitle="Escolha o plano que acompanha o momento da sua prática clínica."
           />
-
           <div className="grid md:grid-cols-3 gap-6 mt-12">
             <PlanCard
               name="Starter"
@@ -923,12 +1086,84 @@ export default function FundadoraPage() {
               ]}
             />
           </div>
+          <p
+            className="text-center mt-8 text-sm"
+            style={{ color: C.text3 }}
+          >
+            Todos os planos anuais incluem os 4 bônus listados acima.
+          </p>
         </div>
       </section>
 
-      {/* ========================================================
-          COMUNIDADE (CARROSSEL)
-      ======================================================== */}
+      {/* GARANTIA (NOVA) */}
+      <section id="garantia" className="py-20" style={{ background: C.card }}>
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <div
+            className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+            style={{ background: C.primarySoft }}
+          >
+            <ShieldCheck className="w-10 h-10" style={{ color: C.primary }} />
+          </div>
+          <h2
+            className="text-3xl md:text-4xl font-bold leading-tight mb-6"
+            style={{ color: C.text }}
+          >
+            Zero risco. Se não servir, devolvemos seu dinheiro.
+          </h2>
+          <p className="text-lg leading-relaxed" style={{ color: C.text2 }}>
+            Você tem <strong style={{ color: C.text }}>7 dias de garantia incondicional</strong>.
+            Se em uma semana a Auton não entregar o que você viu aqui, responde o email do
+            onboarding e devolvemos 100% do valor. Sem pergunta, sem formulário, sem burocracia.
+            O risco fica com a gente — porque confiamos no que construímos.
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ (NOVA) */}
+      <section className="py-24" style={{ background: C.bg }}>
+        <div className="max-w-3xl mx-auto px-6">
+          <SectionTitle
+            eyebrow="Perguntas frequentes"
+            title="Respostas diretas às dúvidas mais comuns."
+          />
+          <div className="space-y-4 mt-12">
+            {[
+              {
+                q: "Não tenho tempo de aprender mais uma ferramenta.",
+                a: "A Auton foi desenhada pra ser usada na primeira consulta, sem migração obrigatória. Você recebe um onboarding guiado de 60 minutos + uma call concierge com o nosso time na primeira semana. Em 7 dias o fluxo já tá rodando no seu dia a dia.",
+              },
+              {
+                q: "E se eu entrar e não for o que promete?",
+                a: "7 dias de garantia incondicional. Se em uma semana você sentir que a Auton não entrega o que viu aqui, responde o email do onboarding e devolvemos 100%. Sem pergunta, sem formulário, sem burocracia.",
+              },
+              {
+                q: "Não tenho tempo para análise profunda em cada consulta.",
+                a: "Exatamente pra isso o AI ADS existe. Ele analisa exames, cruza com histórico e entrega hipóteses ranqueadas em até 5 minutos depois da consulta — você só valida e ajusta. O raciocínio clínico é seu, o trabalho pesado é dele.",
+              },
+              {
+                q: "Meu paciente não adere ao protocolo em casa.",
+                a: "O App do Paciente puxa o protocolo gerado no consultório e entrega em formato de rotina — com check-in diário, lembretes e relatório antes/depois. Você acompanha a adesão em tempo real pelo dashboard.",
+              },
+              {
+                q: "Meu conselho profissional pode questionar o uso de IA?",
+                a: "Todos os planos anuais vêm com parecer jurídico pronto pelos conselhos CFM/CFN/CFP e biblioteca de compliance. A AI ADS é apoio à decisão clínica — o raciocínio final é sempre do profissional.",
+              },
+              {
+                q: "Já uso outro sistema. Não quero migrar.",
+                a: "Você não precisa migrar. A Auton opera em paralelo ao seu sistema atual durante a transição. Se decidir migrar depois, nosso time faz a importação de prontuários em até 48h, sem custo.",
+              },
+              {
+                q: "Meus dados clínicos estão seguros?",
+                a: "Sim. A Auton está em conformidade com a LGPD, dados criptografados em trânsito e em repouso, servidores no Brasil e acesso auditável. Segurança clínica não é diferencial — é pré-requisito.",
+              },
+            ].map((item, i) => (
+              <FAQItem key={i} q={item.q} a={item.a} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* COMUNIDADE (CARROSSEL) */}
       <section id="comunidade" className="py-24" style={{ background: C.card }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
@@ -936,44 +1171,13 @@ export default function FundadoraPage() {
             title="Junte-se à primeira comunidade integrativa do país."
             subtitle="Profissionais que já cruzaram a ponte entre tratar sintoma e tratar causa."
           />
-
           <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-6 px-6 mt-12">
             {[
-              {
-                name: "Dra. Paula",
-                role: "Nutricionista integrativa",
-                city: "São Paulo, SP",
-                quote:
-                  "Recuperei 6h da minha semana só no prontuário. O paciente percebeu a diferença na 2ª consulta.",
-              },
-              {
-                name: "Dr. Caio",
-                role: "Médico",
-                city: "Belo Horizonte, MG",
-                quote:
-                  "Pela primeira vez tenho um raciocínio de causa raiz estruturado — e o paciente continua engajado em casa.",
-              },
-              {
-                name: "Dra. Juliana",
-                role: "Biomédica integrativa",
-                city: "Porto Alegre, RS",
-                quote:
-                  "Parei de ter aquela sensação de que tô vendendo consulta. Volto pra casa sentindo que resolvi.",
-              },
-              {
-                name: "Dra. Marina",
-                role: "Médica integrativa",
-                city: "Curitiba, PR",
-                quote:
-                  "A Auton trouxe método para algo que eu fazia por intuição. Meu raciocínio clínico amadureceu em meses.",
-              },
-              {
-                name: "Dr. Rafael",
-                role: "Nutrólogo",
-                city: "Florianópolis, SC",
-                quote:
-                  "Meus pacientes complexos finalmente têm um caminho claro. E eu não preciso mais levar caso pra casa.",
-              },
+              { name: "Dra. Paula", role: "Nutricionista integrativa", city: "São Paulo, SP", quote: "Recuperei 6h da minha semana só no prontuário. O paciente percebeu a diferença na 2ª consulta." },
+              { name: "Dr. Caio", role: "Médico", city: "Belo Horizonte, MG", quote: "Pela primeira vez tenho um raciocínio de causa raiz estruturado — e o paciente continua engajado em casa." },
+              { name: "Dra. Juliana", role: "Biomédica integrativa", city: "Porto Alegre, RS", quote: "Parei de ter aquela sensação de que tô vendendo consulta. Volto pra casa sentindo que resolvi." },
+              { name: "Dra. Marina", role: "Médica integrativa", city: "Curitiba, PR", quote: "A Auton trouxe método para algo que eu fazia por intuição. Meu raciocínio clínico amadureceu em meses." },
+              { name: "Dr. Rafael", role: "Nutrólogo", city: "Florianópolis, SC", quote: "Meus pacientes complexos finalmente têm um caminho claro. E eu não preciso mais levar caso pra casa." },
             ].map((t, i) => (
               <div
                 key={i}
@@ -1009,7 +1213,6 @@ export default function FundadoraPage() {
               </div>
             ))}
           </div>
-
           <p className="text-xs text-center mt-8" style={{ color: C.text3 }}>
             * Nomes alterados. Depoimentos baseados em casos reais, com consentimento dos
             profissionais.
@@ -1017,58 +1220,23 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          FUNCIONALIDADES (CARROSSEL)
-      ======================================================== */}
+      {/* FUNCIONALIDADES (CARROSSEL) */}
       <section className="py-24" style={{ background: C.bg }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
             eyebrow="Mais sobre como fazemos"
             title="Tecnologia a serviço do raciocínio clínico."
           />
-
           <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-6 px-6 mt-12">
             {[
-              {
-                icon: Brain,
-                title: "AI ADS — motor clínico",
-                desc: "Raciocina no modelo Análise → Diagnóstico → Solução em tempo real durante a consulta.",
-              },
-              {
-                icon: FlaskConical,
-                title: "Leitura funcional de exames",
-                desc: "Interpreta biomarcadores dentro do contexto individual — não só faixas de referência.",
-              },
-              {
-                icon: ClipboardList,
-                title: "Protocolo personalizado",
-                desc: "Plano terapêutico integrativo gerado e priorizado pela IA, pronto pra sua revisão.",
-              },
-              {
-                icon: FileText,
-                title: "Prontuário automático",
-                desc: "A teleconsulta gera o prontuário sozinha. Você foca no paciente, não no teclado.",
-              },
-              {
-                icon: Smartphone,
-                title: "App do paciente",
-                desc: "Check-in diário, relatórios antes/depois, adesão em tempo real.",
-              },
-              {
-                icon: Network,
-                title: "Rede multidisciplinar",
-                desc: "Encaminhe pacientes para colegas integrativos. Seja encaminhado. Ganhe junto.",
-              },
-              {
-                icon: MessageSquare,
-                title: "Comunidade fechada",
-                desc: "Discussão clínica séria, só com profissionais. Sem ruído, sem exposição.",
-              },
-              {
-                icon: Layers,
-                title: "Camadas clínicas integradas",
-                desc: "Metabolismo, hormônios, intestino, inflamação, mente — todos conversando.",
-              },
+              { icon: Brain, title: "AI ADS — motor clínico", desc: "Raciocina no modelo Análise → Diagnóstico → Solução em tempo real durante a consulta." },
+              { icon: FlaskConical, title: "Leitura funcional de exames", desc: "Interpreta biomarcadores dentro do contexto individual — não só faixas de referência." },
+              { icon: ClipboardList, title: "Protocolo personalizado", desc: "Plano terapêutico integrativo gerado e priorizado pela IA, pronto pra sua revisão." },
+              { icon: FileText, title: "Prontuário automático", desc: "A teleconsulta gera o prontuário sozinha. Você foca no paciente, não no teclado." },
+              { icon: Smartphone, title: "App do paciente", desc: "Check-in diário, relatórios antes/depois, adesão em tempo real." },
+              { icon: Network, title: "Rede multidisciplinar", desc: "Encaminhe pacientes para colegas integrativos. Seja encaminhado. Ganhe junto." },
+              { icon: MessageSquare, title: "Comunidade fechada", desc: "Discussão clínica séria, só com profissionais. Sem ruído, sem exposição." },
+              { icon: Layers, title: "Camadas clínicas integradas", desc: "Metabolismo, hormônios, intestino, inflamação, mente — todos conversando." },
             ].map((f, i) => (
               <div
                 key={i}
@@ -1097,9 +1265,7 @@ export default function FundadoraPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          CTA FINAL
-      ======================================================== */}
+      {/* CTA FINAL */}
       <section className="py-24" style={{ background: C.primary }}>
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2
@@ -1120,16 +1286,14 @@ export default function FundadoraPage() {
               Começar agora
               <ArrowRight className="w-5 h-5" />
             </PrimaryBtn>
-            <OutlineBtn big onDarkBg>
-              Falar com um especialista
+            <OutlineBtn big onDarkBg href="#garantia">
+              Ver garantia
             </OutlineBtn>
           </div>
         </div>
       </section>
 
-      {/* ========================================================
-          RODAPÉ
-      ======================================================== */}
+      {/* RODAPÉ */}
       <footer className="py-16" style={{ background: "#0F1E33", color: "#FFFFFF" }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-10 mb-12">
@@ -1146,8 +1310,8 @@ export default function FundadoraPage() {
                 links: [
                   { href: "#solucoes", label: "Soluções" },
                   { href: "#planos", label: "Planos" },
-                  { href: "#comunidade", label: "Comunidade" },
-                  { href: "#sobre", label: "Método ADS" },
+                  { href: "#metodo", label: "Método ADS" },
+                  { href: "#garantia", label: "Garantia" },
                 ],
               },
               {
@@ -1188,7 +1352,6 @@ export default function FundadoraPage() {
               </div>
             ))}
           </div>
-
           <div
             className="border-t pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
             style={{ borderColor: "rgba(255,255,255,0.1)" }}
@@ -1219,6 +1382,46 @@ export default function FundadoraPage() {
 }
 
 // ============================================================
+// FAQ ITEM
+// ============================================================
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className="rounded-[18px] overflow-hidden transition-all"
+      style={{
+        background: C.card,
+        border: `1px solid ${C.border}`,
+        boxShadow: open ? "0 10px 30px rgba(0,0,0,0.12)" : "0 4px 14px rgba(0,0,0,0.08)",
+      }}
+    >
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between p-6 text-left font-semibold"
+        style={{ color: C.text }}
+      >
+        <span className="pr-4">{q}</span>
+        <span
+          className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform"
+          style={{
+            background: C.primarySoft,
+            transform: open ? "rotate(45deg)" : "none",
+          }}
+        >
+          <Plus className="w-4 h-4" style={{ color: C.primary }} />
+        </span>
+      </button>
+      {open && (
+        <div className="px-6 pb-6 leading-relaxed" style={{ color: C.text2 }}>
+          {a}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
 // PlanCard
 // ============================================================
 
@@ -1239,6 +1442,19 @@ function PlanCard({
   cta: string;
   hero?: boolean;
 }) {
+  const SaveBadge = (
+    <span
+      className="inline-block px-2.5 py-1 rounded-full text-[11px] font-bold ml-2"
+      style={{
+        background: hero ? "rgba(255,255,255,0.2)" : "#DCF5E6",
+        color: hero ? "#FFFFFF" : C.success,
+        letterSpacing: "0.04em",
+      }}
+    >
+      ECONOMIZE 20%
+    </span>
+  );
+
   if (hero) {
     return (
       <div
@@ -1259,13 +1475,16 @@ function PlanCard({
         >
           MAIS ESCOLHIDO
         </div>
-        <p
-          className="text-xs font-semibold uppercase mb-3"
-          style={{ letterSpacing: "0.18em", color: "rgba(255,255,255,0.85)" }}
-        >
-          {name}
-        </p>
-        <div className="flex items-baseline gap-2 mb-1">
+        <div className="flex items-center mb-3">
+          <p
+            className="text-xs font-semibold uppercase"
+            style={{ letterSpacing: "0.18em", color: "rgba(255,255,255,0.85)" }}
+          >
+            {name}
+          </p>
+          {SaveBadge}
+        </div>
+        <div className="flex items-baseline gap-2 mb-1 flex-wrap">
           <span className="text-4xl font-bold">{price}</span>
           <span className="text-sm" style={{ color: "rgba(255,255,255,0.85)" }}>
             {priceHint}
@@ -1281,10 +1500,7 @@ function PlanCard({
               className="flex items-start gap-2 text-sm leading-relaxed"
               style={{ color: "rgba(255,255,255,0.95)" }}
             >
-              <CheckCircle2
-                className="w-4 h-4 mt-0.5 shrink-0"
-                style={{ color: "#A8D0F0" }}
-              />
+              <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "#A8D0F0" }} />
               <span>{it}</span>
             </li>
           ))}
@@ -1308,13 +1524,16 @@ function PlanCard({
         boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
       }}
     >
-      <p
-        className="text-xs font-semibold uppercase mb-3"
-        style={{ letterSpacing: "0.18em", color: C.text3 }}
-      >
-        {name}
-      </p>
-      <div className="flex items-baseline gap-2 mb-1">
+      <div className="flex items-center mb-3">
+        <p
+          className="text-xs font-semibold uppercase"
+          style={{ letterSpacing: "0.18em", color: C.text3 }}
+        >
+          {name}
+        </p>
+        {SaveBadge}
+      </div>
+      <div className="flex items-baseline gap-2 mb-1 flex-wrap">
         <span className="text-4xl font-bold" style={{ color: C.primary }}>
           {price}
         </span>
