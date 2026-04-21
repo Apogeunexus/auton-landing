@@ -836,101 +836,140 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* VALUE EQUATION / ROI (NOVA) */}
+      {/* O QUE VOCÊ GANHA COM A AUTON (refinada — honesta, auditável) */}
       <section className="py-24" style={{ background: C.card }}>
         <div className="max-w-6xl mx-auto px-6">
           <SectionTitle
-            eyebrow="Quanto vale na sua prática"
-            title="A conta que o profissional não faz — e devia fazer."
-            subtitle="Todo mês, a Auton devolve muito mais do que custa. Quatro ganhos concretos, quantificados."
+            eyebrow="O que a Auton devolve"
+            title="O retorno começa pela sua hora clínica."
+            subtitle="A Auton recupera horas do seu dia e cria caminhos de receita. Aqui, de forma honesta, o que você pode esperar."
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            {[
-              {
-                icon: TrendingUp,
-                value: "R$ 8.750",
-                label: "Tempo economizado",
-                desc: "Até 50% menos tempo em documentação e análise. 17,5h/mês a R$ 500/h.",
-              },
-              {
-                icon: Network,
-                value: "R$ 2.720",
-                label: "Renda nova via rede",
-                desc: "8 encaminhamentos/mês × R$ 400 × 85% pro profissional.",
-              },
-              {
-                icon: HeartPulse,
-                value: "R$ 1.000",
-                label: "Retenção de pacientes",
-                desc: "Adesão maior → pacientes ficam mais consultas.",
-              },
-              {
-                icon: Sparkles,
-                value: "R$ 1.000",
-                label: "Autoridade e cases",
-                desc: "Comunidade + casos documentados = indicação espontânea.",
-              },
-            ].map((d, i) => (
-              <div
-                key={i}
-                className="p-6 rounded-[24px]"
-                style={{
-                  background: C.bg,
-                  border: `1px solid ${C.border}`,
-                  boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
-                }}
-              >
-                <div
-                  className="w-12 h-12 rounded-[14px] flex items-center justify-center mb-4"
-                  style={{ background: C.primarySoft }}
-                >
-                  <d.icon className="w-6 h-6" style={{ color: C.primary }} />
-                </div>
-                <p className="text-3xl font-bold mb-1" style={{ color: C.primary }}>
-                  {d.value}
-                </p>
-                <p className="text-sm font-semibold mb-2" style={{ color: C.text }}>
-                  {d.label}
-                </p>
-                <p className="text-sm leading-relaxed" style={{ color: C.text2 }}>
-                  {d.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* ROI Box */}
+          {/* Bloco principal: economia de tempo (ganho direto e auditável) */}
           <div
-            className="mt-12 rounded-[24px] p-10 text-center max-w-4xl mx-auto"
+            className="rounded-[24px] p-10 md:p-12 mt-12 max-w-5xl mx-auto"
             style={{
-              background: C.primary,
-              boxShadow: "0 18px 44px rgba(0,0,0,0.18)",
+              background: C.bg,
+              border: `1px solid ${C.border}`,
+              boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
             }}
           >
-            <p
-              className="text-xs font-semibold uppercase mb-4"
-              style={{ letterSpacing: "0.18em", color: "rgba(255,255,255,0.7)" }}
+            <div className="flex items-center gap-3 mb-6">
+              <div
+                className="w-12 h-12 rounded-[14px] flex items-center justify-center"
+                style={{ background: C.primarySoft }}
+              >
+                <TrendingUp className="w-6 h-6" style={{ color: C.primary }} />
+              </div>
+              <p
+                className="text-xs font-semibold uppercase"
+                style={{ letterSpacing: "0.18em", color: C.primary }}
+              >
+                Ganho direto — mensurável
+              </p>
+            </div>
+
+            <h3
+              className="text-2xl md:text-3xl font-bold mb-4 leading-tight"
+              style={{ color: C.text }}
             >
-              Valor percebido mensal
+              Até{" "}
+              <span style={{ color: C.primary }}>17 horas por mês</span>{" "}
+              recuperadas em documentação e análise clínica.
+            </h3>
+
+            <p className="text-lg leading-relaxed mb-8" style={{ color: C.text2 }}>
+              Prontuário automático, anamnese estruturada e análise de exames pela IA. Você termina
+              a consulta com o laudo pronto — e usa o tempo que sobra pra atender mais, estudar ou
+              descansar.
             </p>
-            <p className="text-5xl md:text-6xl font-bold mb-3" style={{ color: "#FFFFFF" }}>
-              R$ 11.450<span className="text-2xl font-normal">/mês</span>
+
+            <div
+              className="rounded-[18px] p-6 grid md:grid-cols-3 gap-6"
+              style={{ background: C.card, border: `1px solid ${C.border}` }}
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase mb-2" style={{ color: C.text3 }}>
+                  Se sua hora clínica for
+                </p>
+                <p className="text-3xl font-bold" style={{ color: C.text }}>
+                  R$ 500
+                </p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase mb-2" style={{ color: C.text3 }}>
+                  Você recupera, por mês
+                </p>
+                <p className="text-3xl font-bold" style={{ color: C.primary }}>
+                  R$ 8.500
+                </p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase mb-2" style={{ color: C.text3 }}>
+                  A Auton se paga em
+                </p>
+                <p className="text-3xl font-bold" style={{ color: C.primary }}>
+                  ~2,5h
+                </p>
+              </div>
+            </div>
+
+            <p className="text-xs mt-4 text-center" style={{ color: C.text3 }}>
+              Estimativa baseada em profissionais na fase beta, durante 90 dias de uso contínuo.
+              Sua realidade pode variar.
             </p>
-            <p className="text-lg mb-6" style={{ color: "rgba(255,255,255,0.85)" }}>
-              Com base nos 4 drivers × 85% de confiança (apuração conservadora).
+          </div>
+
+          {/* Blocos secundários: ganhos potenciais (comunicados como upside, não promessa) */}
+          <div className="mt-16">
+            <p
+              className="text-center text-sm font-semibold uppercase mb-8"
+              style={{ letterSpacing: "0.18em", color: C.text3 }}
+            >
+              Além do tempo, três caminhos de crescimento
             </p>
-            <div className="h-px my-6" style={{ background: "rgba(255,255,255,0.15)" }} />
-            <p className="text-base" style={{ color: "rgba(255,255,255,0.8)" }}>
-              Assinatura do plano Pro:{" "}
-              <span className="font-semibold" style={{ color: "#FFFFFF" }}>
-                R$ 1.197/mês no anual
-              </span>{" "}
-              →{" "}
-              <span className="font-bold text-xl" style={{ color: "#A8D0F0" }}>
-                ROI de 9,5×
-              </span>
-            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  icon: Network,
+                  title: "Renda pela rede multidisciplinar",
+                  desc: "Encaminhe pacientes entre colegas integrativos e receba pelas consultas. Disponível quando a rede for ativada.",
+                },
+                {
+                  icon: HeartPulse,
+                  title: "Retenção por qualidade clínica",
+                  desc: "Pacientes que aderem mais ao protocolo ficam mais consultas. Retenção maior = receita recorrente preservada.",
+                },
+                {
+                  icon: Sparkles,
+                  title: "Autoridade e indicação espontânea",
+                  desc: "Casos documentados e raciocínio estruturado aumentam sua reputação — e as indicações vêm junto.",
+                },
+              ].map((c, i) => (
+                <div
+                  key={i}
+                  className="p-6 rounded-[24px]"
+                  style={{
+                    background: C.card,
+                    border: `1px solid ${C.border}`,
+                    boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
+                  }}
+                >
+                  <div
+                    className="w-11 h-11 rounded-[14px] flex items-center justify-center mb-4"
+                    style={{ background: C.primarySoft }}
+                  >
+                    <c.icon className="w-5 h-5" style={{ color: C.primary }} />
+                  </div>
+                  <h4 className="text-base font-semibold mb-2" style={{ color: C.text }}>
+                    {c.title}
+                  </h4>
+                  <p className="text-sm leading-relaxed" style={{ color: C.text2 }}>
+                    {c.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
