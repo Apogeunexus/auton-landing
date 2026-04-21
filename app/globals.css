@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { background: #EBF3F6; color: #1A1A1A; }
+body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
